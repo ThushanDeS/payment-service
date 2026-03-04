@@ -1,0 +1,73 @@
+openapi: 3.0.0
+info:
+  title: Payment Service API
+  version: 1.0.0
+  description: API for managing payments and flight fares
+
+servers:
+  - url: http://localhost:8000
+    description: Development server
+
+paths:
+  /api/payments:
+    get:
+      summary: Get all payments
+      tags:
+        - Payments
+      responses:
+        '200':
+          description: List of payments
+    post:
+      summary: Create a new payment
+      tags:
+        - Payments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+      responses:
+        '200':
+          description: Payment created
+
+  /api/fares:
+    get:
+      summary: Get all fares
+      tags:
+        - Fares
+      responses:
+        '200':
+          description: List of fares
+    post:
+      summary: Create a new fare
+      tags:
+        - Fares
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fare'
+      responses:
+        '200':
+          description: Fare created
+
+components:
+  schemas:
+    Payment:
+      type: object
+      properties:
+        amount:
+          type: number
+        currency:
+          type: string
+        description:
+          type: string
+    Fare:
+      type: object
+      properties:
+        price:
+          type: number
+        code:
+          type: string
